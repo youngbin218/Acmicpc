@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+class Size {
+private:
+	int num;
+	int* weight;
+	int* height;
+	int* result;
+public:
+	Size(int num) {
+		this->num = num;
+		weight = new int[num];
+		height = new int[num];
+		result = new int[num];
+	}
+	void write() {
+		for (int i = 0; i < num; i++) {
+			cin >> weight[i] >> height[i];
+			result[i] = 1;
+		}
+	}
+	void bruteForce() {
+		for (int i = 0; i < num; i++) {
+			for (int j = i+1; j < num; j++) {
+				if (weight[i] > weight[j] && height[i] > height[j])
+					result[j]++;
+				else if (weight[i] < weight[j] && height[i] < height[j])
+					result[i]++;
+				else
+					;
+			}
+		}
+		for (int i = 0; i < num; i++)
+			cout << result[i] << " ";
+	}
+};
+
+int main() {
+	int x, y, num;
+	cin >> num;
+	Size s(num);
+	s.write();
+	s.bruteForce();
+}
