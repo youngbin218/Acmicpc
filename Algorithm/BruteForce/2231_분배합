@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+class Decomposition {
+private:
+	int num;
+public:
+	Decomposition(int num) {
+		this->num = num;
+	}
+	int bruteForce() {
+		int i= 0;
+		int value = 0;
+		int* arr = new int[7];
+		for (i = 1; i < num; i++) {
+			int tmp = i;
+			int cnt = 0;
+			for (int j = 6; j >= 0; j--) {
+				arr[j] = tmp / pow(10, j);
+				tmp -= arr[j] * pow(10, j);
+				cnt += arr[j];
+			}
+			if (i + cnt == num) {
+				value = i;
+				break;
+			}
+		}
+		if (i == num)
+			value = 0;
+		return value;
+	}
+};
+
+int main() {
+	int num;
+	cin >> num;
+	Decomposition d(num);
+	cout << d.bruteForce() << endl;
+}
